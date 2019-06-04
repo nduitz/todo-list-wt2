@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import TodoList from './components/TodoList';
+import TodoForm from './components/TodoForm';
+import { inject, observer } from 'mobx-react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default 
+@inject("todoStore") @observer // mit mobx
+class App extends Component {
+
+  // mit state
+  // constructor(props) {
+  //   super(props)
+  
+  //   this.state = {
+  //     todos: [
+  //       {id: 1, title: "WT2 bestehen", done: false},
+  //       {id: 2, title: "Java2 bestehen", done: false},
+  //       {id: 3, title: "Mathe2 bestehen", done: false},
+  //       {id: 4, title: "Feiern gehen", done: false}
+  //     ]
+  //   }
+  // }
+  
+  render() {
+    const {todos} = this.props.todoStore
+
+    const handleAddTodo = (todo) => {
+      this.props.todoStore.addTodo(todo)
+      this.setState(state)
+      // mit state
+      // this.setState((state) => ({
+      //   todos: [...state.todos, todo]
+      // }));
+    }
+
+    return (
+      <div>
+        <TodoList todos={todos}></TodoList>
+        <TodoForm handleAddTodo={handleAddTodo}></TodoForm>
+      </div>
+    )
+  }
 }
-
-export default App;
