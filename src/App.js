@@ -26,7 +26,6 @@ class App extends Component {
 
     const handleAddTodo = (todo) => {
       this.props.todoStore.addTodo(todo)
-      this.setState(state)
       // mit state
       // this.setState((state) => ({
       //   todos: [...state.todos, todo]
